@@ -1,7 +1,22 @@
 # Credit-Risk-Modelling
 
-##  Project Overview 
-This project aims to build an advanced credit risk model, incorporating a credit scorecard that classifies loan applications into Poor, Average, Good, and Excellent categories. The classification is based on criteria similar to the CIBIL scoring system.
+A machine learning-powered **credit risk modeling application** that predicts an individual's **default probability**, computes a standardized **credit score (300–900)**, and assigns a **credit rating** based on financial and demographic data.
+
+Built using `scikit-learn` for modeling and `Streamlit` for the interactive frontend, this app helps financial institutions assess creditworthiness with speed and transparency.
+
+
+##  Project Overview
+
+The application uses a trained **logistic regression model** to predict the likelihood of credit default. Based on this probability, a credit score is calculated and categorized into qualitative ratings such as *Poor*, *Average*, *Good*, and *Excellent*. The UI allows users to enter data like age, income, loan amount, credit utilization, and more to receive real-time scoring.
+
+
+##  Features
+
+-  Real-time prediction of **default probability**
+-  Calculation of standardized **credit score (300–900 scale)**
+-  Assignment of **credit rating** (Poor/Average/Good/Excellent)
+-  Clean, intuitive **Streamlit UI**
+-  Dynamic computation of derived metrics like **Loan-to-Income Ratio**
 
 ##  Dataset Information  
 
