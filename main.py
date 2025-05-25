@@ -1,7 +1,10 @@
 import streamlit as st
 from prediction_helper import predict
 
-st.title("Credit Risk Modelling")
+st.title("📊Credit Risk Modelling")
+
+# st.subheader("📝 Applicant Details & Loan Request")
+st.subheader("📝 Applicant & Loan Information")
 
 row1 = st.columns(1)
 row2 = st.columns(3)
@@ -45,9 +48,45 @@ with row6[1]:
     loan_type = st.selectbox('Loan Type', ['Unsecured', 'Secured'])
 
 if st.button("Calculate risk"):
-    probability, credit_score, rating = predict(age, income, loan_amount, loan_tenure_months, avg_dpd_per_delinquency,
+    default_probability, credit_score, rating = predict(age, income, loan_amount, loan_tenure_months, avg_dpd_per_delinquency,
                                                 delinquency_ratio, credit_utilization_ratio, num_open_accounts,
                                                 residence_type, loan_purpose, loan_type)
-    st.write(f"Default Probability: **{probability:.2%}**")
-    st.write(f"Credit Score: **{credit_score}**")
-    st.write(f"Rating: **{rating}**")
+    st.divider()
+    st.subheader("📋Credit Assessment Summary")
+    st.markdown("""
+    <style>
+    .stProgress > div > div > div > div {
+        background-color: #d33c46;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    # st.metric("Credit Rating", rating)
+    # st.write(f"Default Probability: **{default_probability:.2%}**")
+    # st.write(f"Credit Score: **{credit_score}**")
+    # st.write(f"Rating: **{rating}**")
+
+    credit_rating_help_text = """
+    **Credit Rating is determined by the Credit Score:**
+    - **Excellent:** 750 - 900
+    - **Good:** 650 - 749
+    - **Average:** 500 - 649
+    - **Poor:** 300 - 499
+    - **Undefined:** Scores outside 300-900 range
+    """
+
+    col1, col2, col3 = st.columns(3) # Creates three columns
+
+    with col1:
+
+        st.metric(label="🏆Credit Rating", value=rating, help=credit_rating_help_text)
+
+    with col2:
+        st.metric(label="⭐Credit Score", value=credit_score) 
+
+    with col3:
+        st.metric(label="⚠️Default Probability", value=f"{default_probability:.2%}") 
+
+
+    st.progress(int(default_probability * 100), text="📈Risk Level") 
+   
+    st.markdown("---") 
